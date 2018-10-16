@@ -1,0 +1,128 @@
+.productDetail{
+  font-size: 23px;
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+  color:dimgray;
+}
+.material-icons{
+  pointer-events: none;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+.container{
+  padding-top:2%;
+}
+.cont{
+  padding-left:10%;
+}
+@media only screen and (max-width: 600px) {
+  .container{
+    padding-top:2%;
+    padding-left:10%;
+  }
+}
+
+body{
+  background-color: whitesmoke
+}
+thead tr th{
+  background-color: #7953d2
+}
+#table #table-row{
+  font-weight: bolder !important;
+  font-size: 15px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  #wrap{
+    max-width:100% !important;
+  }
+  #table{
+    /* width:50%; */
+  }
+}
+
+.navbar-btn{
+  background: none;
+  border: none
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+#brand{
+  font-weight: bold;
+}
+#details{
+  float:right;
+}
+#cart{
+  font-size: 2.5em;
+  float: left;
+}
+.desc{
+  float: left;
+}
+
+#cart-btn{
+  float:right;
+}
+#price{
+  font-weight: 600;
+}
+#cart-head{
+  font-weight:bold;
+  font-size: 23px;
+}
+#date{
+  float:left;
+}
+#table{
+  overflow-x: scroll;
+}
+#mytable,#td{
+  font-size: 20px;
+  border-top-style: solid;
+  border-bottom-style:solid;
+  font-weight: 200;
+  overflow-x: scroll;
+  text-align: center;
+}
+#th{
+  padding-right: 15px;
+  font-weight: 350;
+}
+table tbody h6{
+  float:left;
+}
+
+/* Slim scroll bar */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px grey; 
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(44, 43, 43); 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #181717; 
+}
+
+#Hr{
+  height:2px;
+  background-color: blue
+}
