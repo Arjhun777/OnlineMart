@@ -13,14 +13,18 @@ const styles = theme => ({
   },
   mybtn:{
     float:'left'
+  },
+  btnclr:{
+    backgroundColor:'orange'
   }
 });
 
+//Material-ui button which the button is reused
 function ContainedButtons(props) {
   const { classes } = props;
   return (
     <div>
-      <Button style={{float:[props.flt],backgroundColor:[props.clr]}} className={classes.mybtn} type={props.type} variant="contained" color={props.mycolor} className={classes.button}>
+      <Button style={{float:[props.flt],backgroundColor:[props.clr],marginTop:[props.top],color:[props.textcolor]}} className={classes.mybtn} type={props.type} variant="contained" color={props.mycolor} className={classes.button}>
         {props.name}
       </Button>
     </div>

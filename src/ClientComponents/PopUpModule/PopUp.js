@@ -65,6 +65,8 @@ const districts = {
   ]
 }
 
+
+// ---------------------------Total form validataion for user details for billing----------
 class OutlinedTextFields extends React.Component {
   constructor(props) {
     super(props);
@@ -79,10 +81,34 @@ class OutlinedTextFields extends React.Component {
         street:'',
         tod:''
       },
-      districts: []
+      paymentcod:{
+        fromdate:'',
+        todate:''
+      },
+      paymentcard:{
+        expirationdate:'',
+        cardnumber:''
+      },
+      paymentnet:{
+        username:'',
+        password:'',
+      },
+      districts: [],valid:true
   }
   };
 
+  componentDidMount(){
+    const detail=JSON.parse(localStorage.getItem('details'));
+    if(detail==null){
+      const details=[]
+      localStorage.setItem('details',JSON.stringify(details));
+    }
+    const paymentdetail=JSON.parse(localStorage.getItem('userdetails'));
+    if(paymentdetail==null){
+      const userdetails=[];
+      localStorage.setItem('userdetails',JSON.stringify(userdetails))
+    }
+  }
   handleChange = (name)  => event => {
     const details={...this.state.details}
     details[name]=event.target.value;
@@ -100,25 +126,57 @@ class OutlinedTextFields extends React.Component {
       districts: temp
     });
   }
-
   handleSubmit=()=>{
-    const detail=JSON.parse(localStorage.getItem('details'));
-    if(detail==null){
-      const details=[]
-      localStorage.setItem('details',JSON.stringify(details));
-    }
-    detail.push(this.state.details);
+    let detail=JSON.parse(localStorage.getItem('details'));
+    detail=this.state.details;
     localStorage.setItem('details',JSON.stringify(detail));
-    window.location.pathname="/client"
+    let cart=JSON.parse(localStorage.getItem('cart'));
+    let user=JSON.parse(localStorage.getItem('user'));
+    if(cart.length!=0){
+      if(this.state.details.tod.length!=0){
+        cart.map((data,index)=>(
+        <span>
+          {user[data[1].category][data[0]].quantity=(data[1].quantity)-(data[2])}
+          {localStorage.setItem('user',JSON.stringify(user))}
+        </span>
+      ))
+      window.location.pathname="/bill"
+      }
+      else{
+            let event = new Event('errorCheck');
+            window.dispatchEvent(event);
+      }
+    }
+    else{
+      alert("No products in the cart")
+      window.location.pathname="/client"
+      }
+      
+      const payment=JSON.parse(localStorage.getItem('userdetails'))
+      if(this.state.details.tod=='COD'){
+        payment.push(this.state.paymentcod)
+        localStorage.setItem('userdetails',JSON.stringify(payment));
+      }
+      else if(this.state.details.tod=='Credit Card'){
+        payment.push(this.state.paymentcard)
+        localStorage.setItem('userdetails',JSON.stringify(payment));
+      }
+      else{
+        payment.push(this.state.paymentnet)
+        localStorage.setItem('userdetails',JSON.stringify(payment));
+      }
+      console.log(this.state.paymentnet.username)
   }
+
+
   tod=(data)=>{
     const details={...this.state.details}
     details.tod=data;
-    alert();
     this.setState({
       details:details
     })
   }
+
   render() {
     const { classes } = this.props;
     return (
@@ -247,9 +305,9 @@ class OutlinedTextFields extends React.Component {
           errorMessages={['This field is required']}
         />
         <hr id="Hr"/>
-        <RadioButton click={this.tod}/>
-          <Link to={`/client`}><ContainedButtons name={"close"} mycolor={"secondary"} flt={"left"}>close</ContainedButtons></Link>
-          <ContainedButtons type={"submit"} name={"Submit"} mycolor={"#7953d2"} flt={"left"}>Submit</ContainedButtons>            
+        <RadioButton click={this.tod} error={this.state.valid} paymentcod={this.state.paymentcod} paymentcard={this.state.paymentcard} paymentnet={this.state.paymentnet}/>
+          <Link to={`/client`}><ContainedButtons name={"close"} mycolor={"white"} flt={"left"}>close</ContainedButtons></Link>
+          <ContainedButtons type={"submit"} name={"Submit"} mycolor={"secondary"} flt={"left"}>Submit</ContainedButtons>            
         </ValidatorForm>
       </form>
       </div>

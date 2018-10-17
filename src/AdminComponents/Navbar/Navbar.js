@@ -13,6 +13,9 @@ const styles = {
   },
   mybtn:{
     float:'right'
+  },
+  mycolor:{
+    backgroundColor:'#232f3e'
   }
 };
 const theme = createMuiTheme({
@@ -22,18 +25,31 @@ const theme = createMuiTheme({
       },
     },
   });
+  function logout(){
+    localStorage.setItem('login',JSON.stringify(false))
+    // window.location.reload();
+    window.location.pathname="/" 
+  }
+  function login(){
+    window.location.pathname="/" 
+  }
 
+// Navbar for the page
 function SimpleAppBar(props) {
   const { classes } = props;
-
+  const value=JSON.parse(localStorage.getItem('login'))
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="primary">
-        <Toolbar>
+      <AppBar position="static" className={classes.mycolor} id="NavBar-head">
+        <Toolbar >
           <Typography variant="h5" color="inherit">
             Online-Mart
-            <Link to={`/`}><button className="navbar-btn">Admin</button></Link>
-            <Link to={`/client`}><button className="navbar-btn">client</button></Link>
+          </Typography>
+          <Typography id="navbar-tool">
+            {value?<Link to={`/admin`}><button className="navbar-btn">Admin</button></Link>:<Link to={`/`}><button className="navbar-btn">Admin</button></Link>}
+            <Link to={`/client`}><button className="navbar-btn">Client</button></Link>
+            <span className="vline"></span>
+            {value?<button className="navbar-btn" onClick={logout}>Logout</button>:<button className="navbar-btn" onClick={login}>Login</button>}
           </Typography>
         </Toolbar>
       </AppBar>

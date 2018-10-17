@@ -6,11 +6,20 @@
 .material-icons{
   pointer-events: none;
 }
-
+.whole-admin-div{
+  text-align: center;
+  display: inline-block;
+  position: absolute;
+  left: 30%;
+  margin-top: 10%;
+}
+#admin-user{
+  margin-top: 10px;
+}
 a:hover{
   text-decoration: none;
 }
-
+/* ---container styling-------- */
 .container{
   padding-top:2%;
 }
@@ -22,14 +31,17 @@ a:hover{
     padding-top:2%;
     padding-left:10%;
   }
+.whole-admin-div{
+    left:1%
+  }
 }
 
 body{
   background-color: whitesmoke
 }
-thead tr th{
+/* thead tr th{
   background-color: #7953d2
-}
+} */
 #table #table-row{
   font-weight: bolder !important;
   font-size: 15px !important;
@@ -39,20 +51,26 @@ thead tr th{
   #wrap{
     max-width:100% !important;
   }
-  #table{
-    /* width:50%; */
+  #navbar-tool{
+    margin-left: 60% !important;
   }
 }
-
+.vline{
+  border-left: 2px solid white;
+  height: 80px;
+}
 .navbar-btn{
   background: none;
-  border: none
+  border: none;
+  color: white
 }
 
 .table {
   margin-bottom: 0;
+  color:black;
 }
 
+/* Cart styling */
 #brand{
   font-weight: bold;
 }
@@ -63,20 +81,27 @@ thead tr th{
   font-size: 2.5em;
   float: left;
 }
+#cart-table-div{
+  margin-top: 30px;
+}
 .desc{
   float: left;
 }
 
 #cart-btn{
   float:right;
+  /* margin-top: -30%; */
+}
+#card-container{
+  background-color: #2e3991 !important;
+}
+#minusplus{
+  cursor: pointer;
 }
 #price{
   font-weight: 600;
 }
-#cart-head{
-  font-weight:bold;
-  font-size: 23px;
-}
+/* ---table styling--- */
 #date{
   float:left;
 }
@@ -92,14 +117,25 @@ thead tr th{
   text-align: center;
 }
 #th{
-  padding-right: 15px;
+  padding-right: 5px;
   font-weight: 350;
 }
-table tbody h6{
-  float:left;
+#h6{
+  font-size: 20px;
+}
+#mytab{
+  border:1px dashed black;
+  text-align: center;
+}
+#myTr{
+  border:1px dashed black;
+}
+#h2{
+  color: #232f3e;
 }
 
-/* Slim scroll bar */
+/* ----------Slim scroll bar----------- */
+
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
@@ -124,5 +160,39 @@ table tbody h6{
 
 #Hr{
   height:2px;
-  background-color: blue
+  background-color: #4f5864;
+}
+
+#cart-btn-add{
+  float:left;
+}
+
+.paper{
+  padding: 10px;
+}
+.h4{
+  text-align: center;
+}
+.h6{
+  margin-left: 20px;
+}
+
+#table-a{
+  color:white;
+}
+
+/* @media print {
+  body * {
+    display: none;
+  }
+  #printarea {
+    display: block;
+  }
+  
+} */
+
+
+#navbar-tool{
+  margin-left: 70%;
+  font-size: 22px;
 }

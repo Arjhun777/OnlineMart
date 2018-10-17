@@ -4,7 +4,15 @@ import Grid from '@material-ui/core/Grid';
 import CartManage from '../CartManage/CartManage'
 import Icon from '@material-ui/core/Icon';
 
+// ---------Inventory which will call cartManagement
 class Inventory extends Component{
+    componentWillMount(){
+        const cart=JSON.parse(localStorage.getItem('details'));
+        if(cart==null){
+            const cart=[];
+            localStorage.setItem('cart',JSON.stringify(cart))
+        }
+    }
     render(){
         console.log(this.props.Paper);
         return(

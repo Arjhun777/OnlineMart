@@ -23,24 +23,28 @@ const styles = theme => ({
     minWidth: 700,
   },
 });
-
 let value=0;
+
+// Table for the admin to view the added products
 class SimpleTable extends Component {
   constructor(props){
     super(props)
       this.state={
-        storage:[]
+        storage:[],
+        valid:false
       }
   }
   componentWillMount(){
     const user=JSON.parse(localStorage.getItem('user'));
+    let login=JSON.parse(localStorage.getItem('login'));
     if(user==null){
       const user={Shoes:[],Watches:[],TShirt:[],Mobile:[]};
       localStorage.setItem('user',JSON.stringify(user));
       }
     const users=JSON.parse(localStorage.getItem('user'));
     this.setState({
-      storage:users
+      storage:users,
+      valid:login
     })
   }
   
@@ -91,7 +95,7 @@ class SimpleTable extends Component {
                  <TableCell>{row.description}</TableCell>
                  <TableCell onClick={routes}>
                   <Link to={`/table/${ind}/${row.category}`}><EditIcon className={classes}></EditIcon></Link></TableCell>
-                 <TableCell onClick={()=>this.deleteHandle(ind,row.category)} ><DeleteIcon></DeleteIcon></TableCell>
+                  <TableCell onClick={()=>this.deleteHandle(ind,row.category)} ><DeleteIcon></DeleteIcon></TableCell>
                </TableRow>
             )
             )
@@ -106,7 +110,7 @@ class SimpleTable extends Component {
                  <TableCell numeric>{row.quantity}</TableCell>
                  <TableCell>{row.description}</TableCell>
                  <TableCell onClick={routes}>
-                  <Link to={`/table/${ind}/${row.category}`}><EditIcon className={classes}></EditIcon></Link></TableCell>
+                 <Link to={`/table/${ind}/${row.category}`}><EditIcon className={classes}></EditIcon></Link></TableCell>
                  <TableCell onClick={()=>this.deleteHandle(ind,row.category)} ><DeleteIcon></DeleteIcon></TableCell>
                </TableRow>
             )
@@ -122,7 +126,7 @@ class SimpleTable extends Component {
                  <TableCell numeric>{row.quantity}</TableCell>
                  <TableCell>{row.description}</TableCell>
                  <TableCell onClick={routes}>
-                  <Link to={`/table/${ind}/${row.category}`}><EditIcon className={classes}></EditIcon></Link></TableCell>
+                 <Link to={`/table/${ind}/${row.category}`}><EditIcon className={classes}></EditIcon></Link></TableCell>
                  <TableCell onClick={()=>this.deleteHandle(ind,row.category)} ><DeleteIcon></DeleteIcon></TableCell>
                </TableRow>
             )
@@ -138,7 +142,7 @@ class SimpleTable extends Component {
                  <TableCell numeric>{row.quantity}</TableCell>
                  <TableCell>{row.description}</TableCell>
                  <TableCell onClick={routes}>
-                  <Link to={`/table/${ind}/${row.category}`}><EditIcon className={classes}></EditIcon></Link></TableCell>
+                 <Link to={`/table/${ind}/${row.category}`}><EditIcon className={classes}></EditIcon></Link></TableCell>
                  <TableCell onClick={()=>this.deleteHandle(ind,row.category)} ><DeleteIcon></DeleteIcon></TableCell>
                </TableRow>
             )

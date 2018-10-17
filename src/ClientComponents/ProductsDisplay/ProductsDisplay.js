@@ -1,9 +1,9 @@
 import React ,{Component} from 'react';
 import ContainedButtons from '../../AdminComponents/Button/SubmitButton'
 import DisplayPage from '../DisplayPage/DisplayPage'
-import { BrowserRouter as Router ,Route,Link} from 'react-router-dom'
+import { BrowserRouter as Router ,Route,NavLink} from 'react-router-dom'
 
-
+// --------------------Main page to display the products to client
 class ProductsDisplay extends Component{
     constructor(props){
         super(props)
@@ -28,14 +28,11 @@ class ProductsDisplay extends Component{
             <Router>
                 <div>
                 <h3>Products</h3>
-                {/* <Link to={`/`}><ContainedButtons name={this.state.category[0]}/></Link>
-                <ContainedButtons name={this.state.category[1]}/>
-                <ContainedButtons name={this.state.category[2]}/>
-                <ContainedButtons name={this.state.category[3]}/><br/><br/><br/> */}
                 {this.state.category.map((data,index)=>(
-                    <Link to={this.state.category[index]}><ContainedButtons flt={'left'} name={this.state.category[index]}/></Link>                   
+                <NavLink  to={this.state.category[index]}><ContainedButtons flt={'left'}  clr={'#546E7A'} textcolor={"white"} name={this.state.category[index] }/></NavLink> 
                 ))}<br/><br/><br/>
                 <h6>select your product</h6>
+                    <Route exact path="/all" component = {DisplayPage} />
                     <Route exact path="/Shoes" component = {DisplayPage} />
                     <Route exact path="/Watches" component = {DisplayPage} />
                     <Route exact path="/TShirt" component = {DisplayPage} />

@@ -3,12 +3,15 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '../../AdminComponents/Button/SubmitButton'
 import { BrowserRouter as Router ,Route,Link} from 'react-router-dom'
 
+
+// total cart management
 class CartManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             totalCost:0,
-            cart: []
+            cart: [],
+            // valid:true
         }
     }
     getValue(){
@@ -41,13 +44,43 @@ class CartManage extends Component {
         })
         localStorage.setItem('cart',JSON.stringify(cartcp))
     }
-    handleSubmit=()=>{
-        // this.state.cart;
+    minusQuantity(data,index){
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        let val=data[2]-1;
+        if(val>=1){
+        cart[index][2]=val;
+        let totalCost=this.state.totalCost-(data[1].price)
+        this.setState({
+            cart:cart,
+            totalCost:totalCost
+        })
+        localStorage.setItem('cart',JSON.stringify(cart))  
+    }      
     }
-    
+    plusQuantity(data,index){
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        let val=data[2]+1;
+        if(val<=cart[index][1].quantity){
+        cart[index][2]=val;
+        let totalCost=this.state.totalCost+parseInt(data[1].price)
+        this.setState({
+            cart:cart,
+            totalCost:totalCost
+        })
+        localStorage.setItem('cart',JSON.stringify(cart)) }
+    }
+    checkValid(){
+        let valid=true;
+        if(this.state.totalCost<=0){
+            valid=false;
+        }
+        return(
+            valid
+        )
+    }
     render() {
         return (
-            <div>
+            <div id="cart-table-div">
                 <table id="mytable">
                     <thead>
                         <tr id="td">
@@ -62,16 +95,17 @@ class CartManage extends Component {
                             {this.state.cart.map((data,index) => (
                                 <tr>
                                     <td>{data[1].name}</td>
-                                    <td>{data[2]}</td>
+                                    <td><span id="minusplus" onClick={()=>this.minusQuantity(data,index)}>-  </span>{data[2]}<span id="minusplus" onClick={()=>this.plusQuantity(data,index)}>  +</span></td>
                                     <td>{data[1].price}</td>
                                     <td>{data[2]*data[1].price}</td>
                                     <td onClick={()=>this.deleteHandle(index)} ><DeleteIcon></DeleteIcon></td>
                                 </tr>
                             ))}
-                            <h6>Total:{this.state.totalCost}</h6>
-                            <Link to={`/userdetails`}> <Button name={'Check Out'} flt={'right'} clr={'orange'}></Button></Link>
                     </tbody>
+                    
                 </table>
+                <h6 id="h6">Total:{this.state.totalCost}</h6>
+                {this.checkValid()?<Link to={`/userdetails`}> <Button name={'Check Out'} flt={'right'} clr={'orange'}></Button></Link>:null}
 
             </div>
         )

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
-import routes from '../../routes'
 
 const styles = theme => ({
   button: {
@@ -15,6 +14,7 @@ const styles = theme => ({
   },
 });
 
+//Material-ui styles 
 function styled(Component) {
     return (style, options) => {
       function StyledComponent(props) {
@@ -42,7 +42,7 @@ const MyButton = styled(Button)({
     display: 'flex', justifyContent: 'center', 
     boxShadow: '0 3px 5px 2px rgba(	154, 162, 161, .3)',
   });
-
+// MAterial-ui button
 function ContainedButtons(props) {
   const { classes } = props;
   return (

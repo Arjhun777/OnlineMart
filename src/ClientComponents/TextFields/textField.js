@@ -14,10 +14,12 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200,
+    color:'#4f5864'
   },
+
 });
 
-
+// ------------------------------Quantity number box to buy product------------
 class DatePickers extends Component {
     constructor(props){
         super(props);
@@ -30,9 +32,6 @@ class DatePickers extends Component {
 
     componentWillMount(){
         const cart=JSON.parse(localStorage.getItem('cart'));
-        if(cart==null){
-            localStorage.setItem('cart',JSON.stringify(this.state.cart))
-        }
         this.setState({
             myCart:cart
         })
@@ -73,17 +72,18 @@ class DatePickers extends Component {
         localStorage.setItem('cart',JSON.stringify(cart));
         this.setState({
             cart:[],    
-            quantity:1
+            quantity:1,
         })
         let event = new Event('storageChange');
         window.dispatchEvent(event);
     }
+    
 render(){
   const { classes } = this.props;
-    const val=1;
   return (
-    <form className={classes.container} noValidate autoComplete="off"> 
-    <ValidatorForm className="container"
+    <form className={classes.container}  noValidate autoComplete="off"> 
+    <ValidatorForm className="container" 
+        
                 ref="form"
                 onSubmit={this.handleSubmit}
                 onError={errors => console.log(errors)}
@@ -96,14 +96,14 @@ render(){
         onChange={this.handleChange}
         value={this.state.quantity}
         className={classes.textField}
-        validators={['required','isPositive','minNumber:1',`maxNumber:${this.state.myCart[this.props.index][1].quantity}`]}
+        validators={['required','isPositive','minNumber:1',`maxNumber:${this.props.datas.quantity}`]}
         errorMessages={['This field is required',"Positive Numbers only",'Atleast one quantity required',"Max limit of stock reached"]}
         InputLabelProps={{
           shrink: true,
         }}
       />
-      <Button id="cart-btn" type='submit' flt={'right'} name={<Icon id="cart">shopping_cart</Icon>} mycolor={"primary"}></Button>
-        </ValidatorForm>
+      <Button id="cart-btn" type='submit' flt={'right'} top={'-40px'}name={<Icon style={{color:"white"}} id="cart">shopping_cart</Icon>} clr={"#232f3e"}></Button>
+    </ValidatorForm>
     </form>
     
   );

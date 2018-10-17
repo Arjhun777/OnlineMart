@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
 import { Link } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar';
 import ContainedButtons from '../Button/SubmitButton'
@@ -44,6 +43,7 @@ const currencies = [
   },
 ];
 
+// Form to add the product by admin
 class OutlinedTextFields extends React.Component {
   constructor(props) {
     super(props);
@@ -92,7 +92,7 @@ class OutlinedTextFields extends React.Component {
       products:product
     });
   };
-
+// submit the data to localstorage
   handleSubmit=()=>{
     const urlVal=this.props.match.params.name;
     const cateVal=this.props.match.params.category;
@@ -103,8 +103,6 @@ class OutlinedTextFields extends React.Component {
     this.setState({
       [cate]:value
     })
-    console.log(value)
-    console.log((this.state.products))
     user[cate].push(this.state.products)
      
     localStorage.setItem('user',JSON.stringify(user))
@@ -120,7 +118,6 @@ class OutlinedTextFields extends React.Component {
     window.location.pathname="/"
   }
     else{
-    alert(user[cateVal][urlVal].name)
       user[cateVal][urlVal].category=this.state.products.category;
       user[cateVal][urlVal].name=this.state.products.name;
       user[cateVal][urlVal].price=this.state.products.price;
@@ -130,7 +127,7 @@ class OutlinedTextFields extends React.Component {
       window.location.pathname="/"
     }
   }
-
+// will validate the form
   render() {
     const { classes } = this.props;
     return (
@@ -220,8 +217,8 @@ class OutlinedTextFields extends React.Component {
           validators={['required']}
           errorMessages={['This field is required']}
         />
-          <ContainedButtons type={"submit"} name={"Submit"} mycolor={"#7953d2"} flt={"left"}>Submit</ContainedButtons>
-          <Link to={`/`}><ContainedButtons name={"close"} mycolor={"secondary"} flt={"left"}>close</ContainedButtons></Link>
+          <ContainedButtons type={"submit"} name={"Submit"} mycolor={"secondary"} flt={"left"}>Submit</ContainedButtons>
+          <Link to={`/`}><ContainedButtons name={"close"}  flt={"left"}>close</ContainedButtons></Link>
         </ValidatorForm>
       </form>
       </div>

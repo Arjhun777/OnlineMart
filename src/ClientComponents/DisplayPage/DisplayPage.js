@@ -9,6 +9,7 @@ class DisplayPage extends Component{
             value:{}
         }
     }
+    // will set the values to send by props
     componentWillMount(){
         const user=JSON.parse(localStorage.getItem('user'));
         const urlVal=window.location.pathname.slice(1);
@@ -18,10 +19,12 @@ class DisplayPage extends Component{
             value:userCate
         })
     }
+
+    // Main display Component to call the container where at the client side
     render(){
         return(
             <div>
-                <Container lg={12} md={12} sm={12} xs={12} valid={true} value={this.state.value}/>
+                <Container lg={4} md={4} sm={12} xs={12} valid={true} value={this.state.value}/>
             </div>
         ) 
     }
