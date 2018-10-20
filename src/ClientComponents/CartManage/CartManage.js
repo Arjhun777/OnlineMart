@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '../../AdminComponents/Button/SubmitButton'
 import { BrowserRouter as Router ,Route,Link} from 'react-router-dom'
-
+import textField from '../TextFields/textField'
 
 // total cart management
 class CartManage extends Component {
@@ -44,31 +44,31 @@ class CartManage extends Component {
         })
         localStorage.setItem('cart',JSON.stringify(cartcp))
     }
-    minusQuantity(data,index){
-        let cart = JSON.parse(localStorage.getItem('cart'));
-        let val=data[2]-1;
-        if(val>=1){
-        cart[index][2]=val;
-        let totalCost=this.state.totalCost-(data[1].price)
-        this.setState({
-            cart:cart,
-            totalCost:totalCost
-        })
-        localStorage.setItem('cart',JSON.stringify(cart))  
-    }      
-    }
-    plusQuantity(data,index){
-        let cart = JSON.parse(localStorage.getItem('cart'));
-        let val=data[2]+1;
-        if(val<=cart[index][1].quantity){
-        cart[index][2]=val;
-        let totalCost=this.state.totalCost+parseInt(data[1].price)
-        this.setState({
-            cart:cart,
-            totalCost:totalCost
-        })
-        localStorage.setItem('cart',JSON.stringify(cart)) }
-    }
+    // minusQuantity(data,index){
+    //     let cart = JSON.parse(localStorage.getItem('cart'));
+    //     let val=data[2]-1;
+    //     if(val>=1){
+    //     cart[index][2]=val;
+    //     let totalCost=this.state.totalCost-(data[1].price)
+    //     this.setState({
+    //         cart:cart,
+    //         totalCost:totalCost
+    //     })
+    //     localStorage.setItem('cart',JSON.stringify(cart))  
+    // }      
+    // }
+    // plusQuantity(data,index){
+    //     let cart = JSON.parse(localStorage.getItem('cart'));
+    //     let val=data[2]+1;
+    //     if(val<=cart[index][1].quantity){
+    //     cart[index][2]=val;
+    //     let totalCost=parseInt(this.state.totalCost)+parseInt(data[1].price)
+    //     this.setState({
+    //         cart:cart,
+    //         totalCost:totalCost
+    //     })
+    //     localStorage.setItem('cart',JSON.stringify(cart)) }
+    // }
     checkValid(){
         let valid=true;
         if(this.state.totalCost<=0){
@@ -77,6 +77,19 @@ class CartManage extends Component {
         return(
             valid
         )
+    }
+    changeNum=(index)=>event=>{
+        let val=event.target.value;
+        let cart=[...this.state.cart]
+        const qua=cart[index][1].quantity;
+        if(parseInt(val)<=parseInt(qua) && parseInt(val)>0){
+        cart[index][2]=val
+        let total=val*parseInt(cart[index][1].price);
+        this.setState({
+            [cart]:val,
+            totalCost:total
+        })
+    }
     }
     render() {
         return (
@@ -95,7 +108,7 @@ class CartManage extends Component {
                             {this.state.cart.map((data,index) => (
                                 <tr>
                                     <td>{data[1].name}</td>
-                                    <td><span id="minusplus" onClick={()=>this.minusQuantity(data,index)}>-  </span>{data[2]}<span id="minusplus" onClick={()=>this.plusQuantity(data,index)}>  +</span></td>
+                                    <td><input type="number" onChange={this.changeNum(index)} style={{width:'50px'}} value={this.state.cart[index][2]}></input></td>
                                     <td>{data[1].price}</td>
                                     <td>{data[2]*data[1].price}</td>
                                     <td onClick={()=>this.deleteHandle(index)} ><DeleteIcon></DeleteIcon></td>

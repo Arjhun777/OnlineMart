@@ -31,20 +31,27 @@ class SimpleTable extends Component {
     super(props)
       this.state={
         storage:[],
-        valid:false
+        valid:false,
+        check:false
       }
   }
   componentWillMount(){
     const user=JSON.parse(localStorage.getItem('user'));
     let login=JSON.parse(localStorage.getItem('login'));
+    let check=false
     if(user==null){
       const user={Shoes:[],Watches:[],TShirt:[],Mobile:[]};
       localStorage.setItem('user',JSON.stringify(user));
+      check=true
       }
     const users=JSON.parse(localStorage.getItem('user'));
+    if(user!=null){
+      check=true
+    }
     this.setState({
       storage:users,
-      valid:login
+      valid:login,
+      check:check
     })
   }
   
@@ -84,7 +91,7 @@ class SimpleTable extends Component {
           </TableRow>
         </TableHead>
         <TableBody>
-            {this.state.storage.Mobile.map((row,ind)=>(
+            {this.state.check?this.state.storage.Mobile.map((row,ind)=>(
                  <TableRow>
                  <TableCell component="th" scope="row">
                    {row.category}
@@ -99,8 +106,8 @@ class SimpleTable extends Component {
                </TableRow>
             )
             )
-            }
-            {this.state.storage.TShirt.map((row,ind)=>(
+            :null}
+            {this.state.check?this.state.storage.TShirt.map((row,ind)=>(
                  <TableRow>
                  <TableCell component="th" scope="row">
                    {row.category}
@@ -115,8 +122,8 @@ class SimpleTable extends Component {
                </TableRow>
             )
             )
-            }
-            {this.state.storage.Shoes.map((row,ind)=>(
+            :null}
+            {this.state.check?this.state.storage.Shoes.map((row,ind)=>(
                  <TableRow>
                  <TableCell component="th" scope="row">
                    {row.category}
@@ -131,8 +138,8 @@ class SimpleTable extends Component {
                </TableRow>
             )
             )
-            }
-            {this.state.storage.Watches.map((row,ind)=>(
+            :null}
+            {this.state.check?this.state.storage.Watches.map((row,ind)=>(
                  <TableRow>
                  <TableCell component="th" scope="row">
                    {row.category}
@@ -147,7 +154,7 @@ class SimpleTable extends Component {
                </TableRow>
             )
             )
-            }
+            :null}
             
               </TableBody>
       </Table>

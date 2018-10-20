@@ -115,7 +115,7 @@ class OutlinedTextFields extends React.Component {
       description:''
       }
     })
-    window.location.pathname="/"
+    window.location.pathname="/admin"
   }
     else{
       user[cateVal][urlVal].category=this.state.products.category;
@@ -124,7 +124,7 @@ class OutlinedTextFields extends React.Component {
       user[cateVal][urlVal].quantity=this.state.products.quantity;
       user[cateVal][urlVal].description=this.state.products.description;
       localStorage.setItem('user',JSON.stringify(user));
-      window.location.pathname="/"
+      window.location.pathname="/admin"
     }
   }
 // will validate the form
